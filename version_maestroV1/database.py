@@ -1,4 +1,4 @@
-import sqlite3
+import sqlite3 as base_datos
 from settings import DB_FILE, CREATE_TABLES_SQL, INSERT_MULTIPLE_COLUMNS_Usuarios, INSERT_MULTIPLE_COLUMNS_Publicaciones
 import logging
 import os
@@ -26,11 +26,11 @@ class BaseDatos:
         :return: Objeto conexión.
         """
         try:
-            self.conexion = sqlite3.connect(self.nombre_bd)
+            self.conexion = base_datos.connect(self.nombre_bd)
             self.cursor = self.conexion.cursor()
             logging.info("✅ Conectado a la base de datos.")
             return self  # Devuelve la instancia de BaseDatos
-        except sqlite3.Error as e:
+        except base_datos.Error as e:
             logging.error(f"❌ Error al conectar con la base de datos: {e}")
             raise e
 
@@ -51,7 +51,7 @@ class BaseDatos:
                 self.conexion.commit()  # Guarda los cambios
                 self.cerrar_conexion()
                 logging.info("✅ Conexión cerrada.")
-        except sqlite3.Error as e:
+        except base_datos.Error as e:
             logging.error(f"❌ Error al cerrar la conexión: {e}")      
     
     def cerrar_conexion(self):
@@ -69,7 +69,7 @@ class BaseDatos:
             self.cursor.executescript(CREATE_TABLES_SQL)  # Ejecuta el script SQL de creación
             self.conexion.commit()
             logging.info("✅ Tablas creadas o verificadas correctamente.")
-        except sqlite3.Error as e:
+        except base_datos.Error as e:
             logging.error(f"❌ Error al crear las tablas: {e}")
             raise e  # Lanza la excepción para que sea manejada externamente
         #finally:
@@ -83,7 +83,7 @@ class BaseDatos:
             self.cursor.executemany("INSERT INTO publicaciones (usuario_id, contenido) VALUES (?, ?)", INSERT_MULTIPLE_COLUMNS_Publicaciones)
             self.conexion.commit()
             logging.info("✅ Datos iniciales insertados correctamente.")
-        except sqlite3.Error as e:
+        except base_datos.Error as e:
             logging.error(f"❌ Error al insertar datos iniciales: {e}")
         #finally:
             #self.__exit__(None, None, None)  # Cierra la conexión manualmente
@@ -99,7 +99,7 @@ class BaseDatos:
             else:
                 self.cursor.execute(query)  # Consulta sin parámetros
             return self.cursor.fetchall()  # Devuelve los resultados
-        except sqlite3.Error as e:
+        except base_datos.Error as e:
             print(f"Error en la consulta: {e}")
             return None
         

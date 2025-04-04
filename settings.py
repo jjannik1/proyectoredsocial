@@ -43,3 +43,65 @@ INSERT_MULTIPLE_COLUMNS_Publicaciones = [
   (2, "¡Hola a todos!"),
   (3, "Estoy aprendiendo Python y SQLite"),
 ]
+USUARIO_INSERTAR = """
+INSERT INTO usuarios (nombre, apellido, correo, fecha_registro) 
+VALUES (?, ?, ?, ?)
+"""
+
+USUARIO_ACTUALIZAR_CORREO = """
+UPDATE usuarios SET correo = ? WHERE id = ?
+"""
+
+USUARIO_ELIMINAR = """
+DELETE FROM usuarios WHERE id = ?
+"""
+
+PUBLICACIONES_ELIMINAR_POR_USUARIO = """
+DELETE FROM publicaciones WHERE usuario_id = ?
+"""
+
+USUARIO_OBTENER_TODOS = """
+SELECT id, nombre, apellido, correo, fecha_registro FROM usuarios
+"""
+
+USUARIO_OBTENER_POR_ID = """
+SELECT id, nombre, apellido, correo, fecha_registro FROM usuarios WHERE id = ?
+"""
+
+USUARIO_BUSCAR_POR_NOMBRE = """
+SELECT id, nombre, apellido, correo, fecha_registro FROM usuarios WHERE nombre LIKE ?
+"""
+
+USUARIO_BUSCAR_POR_CORREO = """
+SELECT id, nombre, apellido, correo, fecha_registro FROM usuarios WHERE correo LIKE ?
+"""
+
+USUARIO_ELIMINAR = """
+DELETE FROM usuarios WHERE id = ?
+"""
+
+PUBLICACIONES_ELIMINAR_POR_USUARIO = """
+DELETE FROM publicaciones WHERE usuario_id = ?
+"""
+
+
+
+PUBLICACIONES_INSERT = """
+INSERT INTO publicaciones (usuario_id, contenido, fecha_publicacion)
+VALUES (?, ?, ?, ?)
+"""
+
+PUBLICACIONES_OBTENER_TODOS = """
+SELECT id, usuario_id, contenido, fecha_publicacion FROM publicaciones
+"""
+
+PUBLICACIONES_POR_USUARIO = """
+SELECT id, usuario_id, contenido, fecha_publicacion FROM publicaciones WHERE usuario_id = ?
+"""
+
+PUBLICACION_ACTUALIZAR_CONTENIDO = """
+UPDATE publicaciones SET contenido = ? WHERE id = ?
+"""
+PUBLICACION_ELIMINAR = """
+DELETE FROM publicaciones WHERE id = ?
+"""

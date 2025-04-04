@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 from database import BaseDatos, DB_PATH
-import modulos.usuarios
-import modulos.publicaciones
-#import modulos.consultas
+from usuario import Usuario
+from publicacion import Publicacion
 import logging
 import os
 
@@ -14,36 +12,27 @@ def inicializar_bd():
     db_path = "red_social.db"  # Ruta del archivo de la base de datos
     if not os.path.exists(DB_PATH):
         print("ℹ️ La base de datos no existe. Creándola...")
-        try:
-            with BaseDatos() as db:
-                db.crear_tablas()
-                db.insertar_datos_iniciales()
-        except Exception as e:
-            logging.error(f"Error al inicializar la base de datos: {e}")
-            print("❌ Ocurrió un error al inicializar la base de datos.")
     else:
         print("ℹ️ La base de datos ya existe. Verificando tablas...")
-        try:
-            with BaseDatos() as db:
-                db.crear_tablas()                
-        except Exception as e:
-            logging.error(f"Error al inicializar la base de datos: {e}")
-            print("❌ Ocurrió un error al inicializar la base de datos.")
-    
+
+    try:
+        with BaseDatos() as db:
+            db.crear_tablas()
+            db.insertar_datos_iniciales()
+    except Exception as e:
+        logging.error(f"Error al inicializar la base de datos: {e}")
+        print("❌ Ocurrió un error al inicializar la base de datos.")
 def menu_usuarios():
     """Menú para gestionar usuarios."""
-    #print("🔹 Gestión de Usuarios (Próximamente)")
-    modulos.usuarios.mostrar_menu()
+    print("🔹 Gestión de Usuarios (Próximamente)")
 
 def menu_publicaciones():
     """Menú para gestionar publicaciones."""
-    #print("🔹 Gestión de Publicaciones (Próximamente)")
-    modulos.publicaciones.mostrar_menu()
+    print("🔹 Gestión de Publicaciones (Próximamente)")
 
 def menu_consultas():
     """Menú para realizar consultas avanzadas."""
     print("🔹 Consultas Avanzadas (Próximamente)")
-    #menus.consultas.mostrar_menu()
 
 def menu():
     """Muestra el menú principal."""
@@ -69,5 +58,6 @@ def menu():
             print("❌ Opción inválida. Intente de nuevo.")
 
 if __name__ == "__main__":   
+   # Inicializar la base de datos   
    inicializar_bd()
    menu()
