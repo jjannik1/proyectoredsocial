@@ -2,6 +2,8 @@ from database import BaseDatos
 from settings import *
 from datetime import datetime
 import logging
+from datetime import datetime
+
 class Publicacion:
     def __init__(self,id=None,id_usuario=None,contenido=None,fecha_publi=None):
         self.id = id
