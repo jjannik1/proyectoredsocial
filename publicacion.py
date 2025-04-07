@@ -1,12 +1,14 @@
 from database import BaseDatos
 from settings import *
 import logging
+from datetime import datetime
+
 class Publicacion:
     def __init__(self,id=None,id_usuario=None,contenido=None,fecha_publi=None):
         self.id = id
         self.id_usuario = id_usuario
         self.contenido=contenido
-        self.fecha_publi = fecha_publi
+        self.fecha_publi = fecha_publi or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
     def guardar_publi(self):
