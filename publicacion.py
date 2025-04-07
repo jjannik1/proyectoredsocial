@@ -1,5 +1,6 @@
 from database import BaseDatos
 from settings import *
+from datetime import datetime
 import logging
 from datetime import datetime
 
@@ -9,7 +10,6 @@ class Publicacion:
         self.id_usuario = id_usuario
         self.contenido=contenido
         self.fecha_publi = fecha_publi or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
 
     def guardar_publi(self):
         try:
