@@ -2,7 +2,7 @@
 from database import BaseDatos, DB_PATH
 import modulos.usuarios
 import modulos.publicaciones
-#import modulos.consultas
+import modulos.consultas
 import logging
 import os
 
@@ -42,8 +42,8 @@ def menu_publicaciones():
 
 def menu_consultas():
     """Menú para realizar consultas avanzadas."""
-    print("🔹 Consultas Avanzadas (Próximamente)")
-    #menus.consultas.mostrar_menu()
+    #print("🔹 Consultas Avanzadas (Próximamente)")
+    modulos.consultas.mostrar_menu()
 
 def menu():
     """Muestra el menú principal."""

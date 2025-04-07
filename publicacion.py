@@ -75,7 +75,7 @@ class Publicacion:
     def eliminar_publicacion(self):
         try:
             with BaseDatos() as db:
-                db.ejecutar_consulta(PUBLICACIONES_ELIMINAR_POR_USUARIO, (self.id,))
+                db.ejecutar_consulta(PUBLICACION_ELIMINAR, (self.id,))
                 return True
             
         except Exception as e:

@@ -109,3 +109,25 @@ DELETE FROM publicaciones WHERE id = ?
 PUBLICACION_OBTENER_POR_ID = """
 SELECT id, usuario_id, contenido, fecha_publicacion FROM publicaciones WHERE id = ?
 """
+
+
+
+USUARIOS_ULTIMO_MES = """
+SELECT * FROM usuarios WHERE fecha_registro >= DATE('now', '-1 month')
+"""
+
+CANTIDAD_PUBLICACIONES = """
+SELECT usuario_id, COUNT(*) FROM publicaciones GROUP BY usuario_id
+"""
+
+USUARIOS_PUBLICAN_MAS_VECES = """
+SELECT usuario_id FROM publicaciones GROUP BY usuario_id HAVING COUNT(*) > 3
+"""
+
+PUBLICACIONES_ANTIGUAS = """
+SELECT * FROM publicaciones ORDER BY fecha_publicacion ASC LIMIT 10
+"""
+
+BUSCAR_PUBLICACION = """
+SELECT * FROM publicaciones WHERE contenido LIKE ?
+"""
