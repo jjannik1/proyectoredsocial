@@ -105,3 +105,7 @@ UPDATE publicaciones SET contenido = ? WHERE id = ?
 PUBLICACION_ELIMINAR = """
 DELETE FROM publicaciones WHERE id = ?
 """
+
+PUBLICACION_OBTENER_POR_ID = """
+SELECT id, usuario_id, contenido, fecha_publicacion FROM publicaciones WHERE id = ?
+"""

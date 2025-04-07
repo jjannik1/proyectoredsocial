@@ -47,9 +47,12 @@ class Publicacion:
                         id=i[0],
                         id_usuario=i[1],
                         contenido=i[2],
-                        fecha_publi=i[4]
+                        fecha_publi=i[3]
                     )
                     publicaciones.append(publicacion)
+
+
+                return publicaciones
 
         except Exception as e:
             logging.error(f'Error al obtener las publicaciones: {e}')
@@ -77,3 +80,24 @@ class Publicacion:
         except Exception as e:
             logging.error(f'Error al eliminar la publicacion: {e}')
             return False
+        
+
+
+    def obtener_por_id(id_publicacion):
+
+        try:
+            with BaseDatos() as db:
+                resultados = db.ejecutar_consulta(PUBLICACION_OBTENER_POR_ID, (id_publicacion,))
+
+                if resultados and len(resultados) > 0:
+                    row = resultados[0]
+                    return Publicacion(id=row[0],
+                                       id_usuario=row[1],
+                                       contenido=row[2],
+                                       fecha_publi=row[3]
+                                       )
+                return None
+            
+        except Exception as e:
+            logging.error(f'Error al obtener publicacion por ID: {e}')
+            return None
