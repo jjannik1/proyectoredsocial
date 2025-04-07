@@ -88,7 +88,7 @@ DELETE FROM publicaciones WHERE usuario_id = ?
 
 PUBLICACIONES_INSERT = """
 INSERT INTO publicaciones (usuario_id, contenido, fecha_publicacion)
-VALUES (?, ?, ?, ?)
+VALUES (?, ?, ?)
 """
 
 PUBLICACIONES_OBTENER_TODOS = """
