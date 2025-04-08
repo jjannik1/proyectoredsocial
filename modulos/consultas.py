@@ -4,7 +4,7 @@ from database import BaseDatos
 
 def mostrar_menu():
     while True:
-        print("Consultas")
+        print("\n Consultas")
         print("1. Usuarios registrados en el último mes")
         print("2. Cantidad total de publicaciones por usuario")
         print("3. Usuarios que han publicado más de 3 veces")
@@ -41,9 +41,17 @@ def mostrar_menu():
 def usuarios_registrados():
     try:
         with BaseDatos() as db:
-            resul = db.ejecutar_consulta(USUARIOS_ULTIMO_MES)
+            result = db.ejecutar_consulta(USUARIOS_ULTIMO_MES)
 
-        print(resul)
+        if result:
+
+            print(f'\n Usuarios registrados desde el ultimo mes:\n')
+
+            for i in result:
+                print(f'{i}')
+
+        else:
+            print("No existen usuarios registrados desde el ultimo mes.")
 
     except Exception as e:
         logging.error(f'Fallo de la consulta: {e}')
@@ -52,9 +60,15 @@ def usuarios_registrados():
 def cantidad_publicaciones():
     try:
         with BaseDatos() as db:
-            resul = db.ejecutar_consulta(CANTIDAD_PUBLICACIONES)
+            result = db.ejecutar_consulta(CANTIDAD_PUBLICACIONES)
 
-        print(resul)
+        if result:
+
+            for i,j in result:
+                print(f'ID usuario: {i} Cantidad de publicaciones: {j}')
+
+        else:
+            print("No existen usuarios que han publicado algo.")
 
     except Exception as e:
         logging.error(f'Fallo de la consulta: {e}')
@@ -62,9 +76,17 @@ def cantidad_publicaciones():
 def usuarios_publican_veces():
     try:
         with BaseDatos() as db:
-            resul = db.ejecutar_consulta(USUARIOS_PUBLICAN_MAS_VECES)
+            result = db.ejecutar_consulta(USUARIOS_PUBLICAN_MAS_VECES)
 
-        print(resul)
+        if result:
+
+            print(f'Usuarios que publican más de 3 veces')
+
+            for i in result:
+                print(f'ID usuario: {i}')
+
+        else:
+            print("No existen usuarios que han publicado mas de 3 veces")
     
     except Exception as e:
         logging.error(f'Fallo de la consulta: {e}')
@@ -72,9 +94,17 @@ def usuarios_publican_veces():
 def publicacion_antigua():
     try:
         with BaseDatos() as db:
-            resul = db.ejecutar_consulta(PUBLICACIONES_ANTIGUAS)
+            result = db.ejecutar_consulta(PUBLICACIONES_ANTIGUAS)
 
-        print(resul)
+        if result:
+
+            print(f'\n Publicaciones más antiguas:')
+
+            for i in result:
+                print(f'\n {i}')
+
+        else:
+            print("No existen publicaciones.")
 
     except Exception as e:
         logging.error(f'Fallo de la consulta: {e}')
@@ -86,9 +116,15 @@ def buscar_publicacion():
 
         palabra_clave = "%"+palabra_clave+"%"
         with BaseDatos() as db:
-            resul = db.ejecutar_consulta(BUSCAR_PUBLICACION, (palabra_clave,))
+            result = db.ejecutar_consulta(BUSCAR_PUBLICACION, (palabra_clave,))
 
-        print(resul)
+        if result:
+
+            for i in result:
+                print(f'\n{i}')
+
+        else:
+            print("No existen publicaciones que contengan la palabra.")
 
         
 
